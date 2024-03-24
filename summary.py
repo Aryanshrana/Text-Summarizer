@@ -23,4 +23,28 @@ for word in doc:
         else:
             word_freq[word.text] += 1
 
-print(word_freq )
+# print(word_freq )
+max_freq=max(word_freq.values())
+
+#normalized frequency
+#normalization
+
+for word in word_freq.keys():
+    word_freq[word]=word_freq[word]/max_freq
+
+
+print(word_freq)
+
+#creating tokens as sentences instead of words
+
+sent_tokens=[sent for sent in doc.sents]
+print(sent_tokens)
+
+sent_scores={}
+for sent in sent_tokens:
+    for word in sent:
+        if word.text in word_freq.keys():
+            if sent not in sent_scores.keys():
+                sent_scores[sent]=word_freq[word.text]
+            else:
+                sent_scores[sent] += word_freq[word.text]
