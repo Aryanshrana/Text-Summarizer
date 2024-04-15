@@ -15,7 +15,7 @@ def summarizer(raw):
 
     #tokenization
     token=[token.text for token in doc]
-    # print(token)
+    print(token)
 
     #count frequency of each word store in a dictonary
     word_freq={}
@@ -26,7 +26,7 @@ def summarizer(raw):
             else:
                 word_freq[word.text] += 1
 
-    # print(word_freq )
+    print(word_freq )
     max_freq=max(word_freq.values())
 
     #normalized frequency
@@ -36,12 +36,12 @@ def summarizer(raw):
         word_freq[word]=word_freq[word]/max_freq
 
 
-    # print(word_freq)
+    print(word_freq)
 
     #creating tokens as sentences instead of words
 
     sent_tokens=[sent for sent in doc.sents]
-    # print(sent_tokens)
+    print(sent_tokens)
 
     sent_scores={}
     for sent in sent_tokens:
@@ -52,7 +52,7 @@ def summarizer(raw):
                 else:
                     sent_scores[sent] += word_freq[word.text]
                     
-    # print(sent_scores)
+    print(sent_scores)
 
     select_len=int(len(sent_tokens)*0.3)
     # print(select_len)

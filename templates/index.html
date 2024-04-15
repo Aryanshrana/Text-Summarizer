@@ -6,40 +6,45 @@
     <title>Text Summarizer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #0a0a0a; /* Dark background */
+            color: #ffffff; /* Light text */
         }
         .container {
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #1f1f1f; /* Darker background */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light shadow */
         }
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #007bff;
+            color: #00ff00; /* Green text */
         }
         label {
             font-weight: bold;
+            color: #ffffff; /* Light text */
         }
         textarea {
-            width: 100%;
+            width: calc(100% - 40px); /* Adjusted width to accommodate padding */
             height: 150px;
             margin-bottom: 10px;
             padding: 10px;
-            border: 1px solid #ccc;
+            background-color: #0a0a0a; /* Dark background */
+            border: 1px solid #999999; /* Medium gray border */
             border-radius: 4px;
+            color: #ffffff; /* Light text */
             resize: none;
         }
         button {
-            background-color: #007bff;
-            color: #fff;
+            display: block; /* Changed to block level */
+            margin: 0 auto; /* Centered horizontally */
+            background-color: #00ff00; /* Green button */
+            color: #000000; /* Black text */
             border: none;
             padding: 10px 20px;
             border-radius: 4px;
@@ -47,13 +52,20 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #00cc00; /* Darker green on hover */
+        }
+        .summary-container {
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Align items with space between */
+            margin-top: 20px;
         }
         .summary {
-            margin-top: 20px;
-            border: 1px solid #ccc;
+            flex: 0 0 calc(50% - 10px); /* Set width for two items */
+            background-color: #333333; /* Dark background */
+            border: 1px solid #666666; /* Medium gray border */
             padding: 10px;
             border-radius: 4px;
+            color: #ffffff; /* Light text */
         }
     </style>
 </head>
@@ -61,19 +73,27 @@
     <div class="container">
         <h1>Text Summarizer</h1>
         <form action="/" method="post">
-            <label for="input_text">Enter your text:</label><br>
-            <textarea id="input_text" name="input_text" required>{{ input_text }}</textarea><br>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <label for="input_text">Enter your text:</label>
+            </div>
+            <textarea id="input_text" name="input_text" required>{{ input_text }}</textarea>
             <button type="submit">Generate Summary</button>
         </form>
 
         {% if summary %}
+        <div class="summary-container">
             <div class="summary">
                 <h2>Summary:</h2>
                 <p>{{ summary }}</p>
-                <p>Original Word Count: {{ original_word_count }}</p>
-                <p>Summary Word Count: {{ summary_word_count }}</p>
             </div>
+            <div class="summary">
+                <h2>Word Counts:</h2>
+                <p>Original: {{ original_word_count }}</p>
+                <p>Summary: {{ summary_word_count }}</p>
+            </div>
+        </div>
         {% endif %}
     </div>
 </body>
 </html>
+
